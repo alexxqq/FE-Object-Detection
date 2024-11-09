@@ -1,36 +1,34 @@
-// src/components/ProcessedImage.tsx
 import React from 'react';
 import styled from 'styled-components';
 
-// Define types for props
 type Process = {
   imageUrl: string;
 };
 
-// Styled component for the container
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 2rem 0;
-  border: 2px solid #007bff; // Border color
+  border: 2px solid #696e79;
   border-radius: 8px;
-  padding: 1rem;
-  background-color: #f9f9f9; // Light background color
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow effect
+  padding: 1.5rem;
+  background-color: #132d46;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 `;
 
-// Styled component for the heading
 const Title = styled.h2`
   margin-bottom: 1rem;
-  color: #007bff; // Title color
+  color: #d1c38d;
+  font-weight: bold;
 `;
 
-// Styled component for the image
 const StyledImage = styled.img`
   max-width: 100%;
   height: auto;
-  border-radius: 5px; // Slight rounding of image corners
+  border-radius: 8px;
+  border: 2px solid #191e29;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const ProcessedImage: React.FC<Process> = ({ imageUrl }) => {

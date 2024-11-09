@@ -1,45 +1,46 @@
 import styled from 'styled-components';
 import authService from '../services/authService';
+import SVG from './Icons/Logo';
 
 const NavbarContainer = styled.nav`
   width: 100%;
-  padding: 1.2rem 2rem; // Adjust padding for better spacing
-  background-color: #1f1f1f; // Darker background for elegance
-  color: #fff; // Text color
-  display: flex; // Flexbox for layout
-  justify-content: space-between; // Space out items
-  align-items: center; // Center items vertically
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); // Shadow for depth
-  /* position: sticky;  */
+  padding: 1.2rem 2rem;
+  background-color: #1f1f1f;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   top: 0;
   left: 0;
-  z-index: 1000; // Ensure navbar is on top
+  z-index: 1000;
 `;
 
-const Logo = styled.div`
+const Logo = styled.a`
   font-size: 1.5rem;
   font-weight: bold;
   letter-spacing: 1px;
-  color: #61dafb; // Highlight color for logo
+  margin-left: 2rem;
+  color: #61dafb;
 `;
 
 const NavItems = styled.div`
   display: flex;
-  gap: 1.5rem; // Space between nav items
+  gap: 1.5rem;
 `;
 
 const NavItem = styled.a`
-  color: #fff; // Link color
-  text-decoration: none; // Remove underline
+  color: #fff;
+  text-decoration: none;
   font-size: 1.1rem;
-  padding: 0.5rem 1rem; // Add padding for a button-like feel
-  border-radius: 4px; // Rounded corners for buttons
-  transition: all 0.3s ease-in-out; // Smooth transitions for hover effects
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
 
   &:hover {
-    background-color: #61dafb; // Hover effect background
-    color: #1f1f1f; // Change text color on hover
+    background-color: #61dafb;
+    color: #1f1f1f;
     text-decoration: none;
   }
 `;
@@ -47,18 +48,17 @@ const NavItem = styled.a`
 const Navbar = () => {
   const isAuthenticated = authService.isAuthenticated(); 
   const handleLogout = () => {
-    authService.logout(); // Call the logout method from authService
-    window.location.reload(); // Reload the page to update the Navbar
+    authService.logout();
+    window.location.reload();
   };
   return (
     <NavbarContainer>
-      <Logo>Test</Logo>
+      <Logo href='/'><SVG/></Logo>
       <NavItems>
-        <NavItem href="/">Home</NavItem>
         {isAuthenticated ? (
           <>
             <NavItem href="/history">History</NavItem>
-            <NavItem as="button" onClick={handleLogout}>Logout</NavItem>
+            <NavItem onClick={handleLogout}>Logout</NavItem>
           </>
         ) : (
           <>

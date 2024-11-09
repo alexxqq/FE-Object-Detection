@@ -1,51 +1,46 @@
-// src/components/DetectionList.tsx
 import React from 'react';
 import styled from 'styled-components';
 
-// Define types for detected objects
 interface DetectedObject {
   name: string;
   confidence: number;
 }
 
-// Define props type
 interface DetectionListProps {
   detections: DetectedObject[];
 }
 
-// Styled component for the container
 const Container = styled.div`
   margin: 2rem 0;
-  padding: 1rem;
-  border: 2px solid #28a745; // Border color
+  padding: 1.5rem;
+  border: 2px solid #696e79;
   border-radius: 8px;
-  background-color: #f9f9f9; // Light background color
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow effect
+  background-color: #132d46;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 `;
 
-// Styled component for the title
 const Title = styled.h2`
-  color: #28a745; // Title color
+  color: #d1c38d;
   margin-bottom: 1rem;
+  font-weight: bold;
 `;
 
-// Styled component for the list
 const List = styled.ul`
-  list-style-type: none; // Remove default list styling
-  padding: 0; // Remove default padding
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
 `;
 
-// Styled component for list items
 const ListItem = styled.li`
-  margin: 0.5rem 0; // Space between list items
-  padding: 0.5rem; // Padding for list items
-  border-radius: 4px; // Rounded corners
-  background-color: #e2f0d9; // Light green background for items
-  color: #333; // Text color
-  transition: background-color 0.2s ease; // Transition for hover effect
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  border-radius: 5px;
+  background-color: #191e29;
+  color: #ffffff;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: #d4edda; // Darker green on hover
+    background-color: #696e79;
   }
 `;
 

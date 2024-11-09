@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import detectionService from '../services/imageService';
 import Navbar from '../components/Navbar';
 import HistoryItem from '../components/HistoryItem';
+import authService from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: #191e29;
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
@@ -18,14 +20,14 @@ const HistoryContainer = styled.div`
   max-width: 600px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background-color: #f9f9f9;
+  background-color: #2a2f3a;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 `;
 
 const Title = styled.h2`
   text-align: center;
-  color: #333;
+  color: #d1c38d;
 `;
 
 const HistoryList = styled.ul`
@@ -34,13 +36,20 @@ const HistoryList = styled.ul`
 `;
 
 const ErrorMessage = styled.p`
-  color: red;
+  color: #ff6b6b;
   text-align: center;
 `;
 
 const History: React.FC = () => {
   const [history, setHistory] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
+  const isAuthenticated = authService.isAuthenticated();
+
+  if (!isAuthenticated) {
+    navigate('/');
+  }
 
   useEffect(() => {
     const fetchHistory = async () => {

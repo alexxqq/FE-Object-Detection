@@ -6,13 +6,13 @@ import DetectionList from '../components/DetectionList';
 import Navbar from '../components/Navbar';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import Loader from '../components/Loader';
 
-// Styled components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: #191e29;
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
@@ -20,7 +20,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 2.5rem;
-  color: #333;
+  color: #fff;
   margin-bottom: 20px;
 `;
 
@@ -33,10 +33,6 @@ const DetectionSection = styled.div`
   margin: 20px 0;
 `;
 
-const LoadingMessage = styled.p`
-  font-size: 1.5rem;
-  color: #007bff;
-`;
 
 interface DetectedObject {
   name: string;
@@ -89,7 +85,7 @@ const Page: React.FC = () => {
         <Navbar />
         <Title>Object Detection</Title>
         <ImageUploader onImageChange={handleImageChange} onSubmit={handleSubmit} loading={loading} />
-        {loading && <LoadingMessage>Processing your image...</LoadingMessage>}
+        {loading && <Loader/>}
         {processedImage && <ProcessedImage imageUrl={processedImage} />}
         {detections.length > 0 && (
           <DetectionSection>

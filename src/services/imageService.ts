@@ -7,17 +7,14 @@ class DetectionService {
     this.API_URL = `${import.meta.env.VITE_APP_API_URL}`;
   }
 
-  // Detect objects and return JSON data
   async detectObjectsToJson(formData: FormData) {
     try {
       const token = localStorage.getItem('token');
       
-      // Create headers object
       const headers: { [key: string]: string } = {
         'Content-Type': 'multipart/form-data',
       };
   
-      // Add Authorization header if token exists
       if (token) {
         headers.Authorization = `Bearer ${token}`;
       }
@@ -33,12 +30,11 @@ class DetectionService {
   }
   
 
-  // Detect objects and return image with bounding boxes
   async detectObjectsToImg(formData: FormData) {
     try {
   
       const response = await axios.post(`${this.API_URL}/image/img_object_detection_to_img`, formData, {
-        responseType: 'blob', // Important for image response
+        responseType: 'blob',
         headers: {
           
           'Content-Type': 'multipart/form-data',
@@ -51,13 +47,13 @@ class DetectionService {
   }
   async getHistory() {
     try {
-      const token = localStorage.getItem('token'); // Get token from localStorage
+      const token = localStorage.getItem('token');
       const response = await axios.get(`${this.API_URL}/task/history`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Add auth header with token
+          Authorization: `Bearer ${token}`,
         },
       });
-      return response.data; // Assuming the response contains the history
+      return response.data;
     } catch (error: any) {
       throw new Error(error.response?.data.detail || 'Error fetching history');
     }

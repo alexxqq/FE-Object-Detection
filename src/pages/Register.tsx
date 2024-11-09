@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import styled from 'styled-components';
-import authService from '../services/authService';
-import { useNavigate } from 'react-router-dom';
-// Define the form data structure
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import styled from "styled-components";
+import authService from "../services/authService";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+
 interface IFormInput {
   username: string;
   password: string;
   email: string;
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+`;
 
 // Styled components
 const FormWrapper = styled.div`
@@ -35,7 +46,7 @@ const Input = styled.input`
 const Button = styled.button`
   width: 100%;
   padding: 0.5rem;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
@@ -55,52 +66,66 @@ const ErrorMessage = styled.p`
 const Register: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  // Initialize React Hook Form
-  const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
 
-  // Define the register handler
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>();
+
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
-      const response = await authService.register(data.username, data.password, data.email);
-      console.log('Registration successful:', response);
-      navigate('/')
-
+      const response = await authService.register(
+        data.username,
+        data.password,
+        data.email
+      );
+      console.log("Registration successful:", response);
+      navigate("/");
     } catch (err: any) {
       setError(err.message);
     }
   };
 
   return (
-    <FormWrapper>
-      <FormTitle>Register</FormTitle>
-      
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-      
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          type="text"
-          placeholder="Username"
-          {...register('username', { required: 'Username is required' })}
-        />
-        {errors.username && <ErrorMessage>{errors.username.message}</ErrorMessage>}
-        
-        <Input
-          type="password"
-          placeholder="Password"
-          {...register('password', { required: 'Password is required' })}
-        />
-        {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
-        
-        <Input
-          type="email"
-          placeholder="Email"
-          {...register('email', { required: 'Email is required' })}
-        />
-        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+    <Container>
+      <Navbar />
+      <FormWrapper>
+        <FormTitle>Register</FormTitle>
 
-        <Button type="submit">Register</Button>
-      </form>
-    </FormWrapper>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            type="text"
+            placeholder="Username"
+            {...register("username", { required: "Username is required" })}
+          />
+          {errors.username && (
+            <ErrorMessage>{errors.username.message}</ErrorMessage>
+          )}
+
+          <Input
+            type="password"
+            placeholder="Password"
+            {...register("password", { required: "Password is required" })}
+          />
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
+
+          <Input
+            type="email"
+            placeholder="Email"
+            {...register("email", { required: "Email is required" })}
+          />
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+
+          <Button type="submit">Register</Button>
+        </form>
+      </FormWrapper>
+    </Container>
   );
 };
 

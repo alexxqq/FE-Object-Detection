@@ -1,15 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
 
-// Define the response type for login and register endpoints
 interface AuthResponse {
   access_token: string;
   token_type: string;
 }
 
-// interface User {
-//   username: string;
-//   password: string;
-// }
 
 class AuthService {
   private API_URL: string;
@@ -18,7 +13,6 @@ class AuthService {
     this.API_URL = `${import.meta.env.VITE_APP_API_URL}/auth` as string;
   }
 
-  // Register a new user
   async register(username: string, password: string, email: string): Promise<AuthResponse> {
     try {
       const response: AxiosResponse<AuthResponse> = await axios.post(`${this.API_URL}/register`, { username, password, email });
@@ -28,12 +22,11 @@ class AuthService {
     }
   }
 
-  // Login a user
   async login(username: string, password: string): Promise<AuthResponse> {
     try {
       const response: AxiosResponse<AuthResponse> = await axios.post(`${this.API_URL}/login`, { username, password });
       if (response.data.access_token) {
-        localStorage.setItem('token', response.data.access_token); // Save token to localStorage
+        localStorage.setItem('token', response.data.access_token);
       }
       console.log(response)
       return response.data;
@@ -42,19 +35,16 @@ class AuthService {
     }
   }
 
-  // Logout a user
   logout(): void {
-    localStorage.removeItem('token'); // Remove token from localStorage
+    localStorage.removeItem('token');
   }
 
-  // Check if user is authenticated
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    return token !== null; // Returns true if token exists, false otherwise
+    return token !== null;
   }
 
-  // Get current authenticated user's details
-  async getCurrentUser(): Promise<any> {  // Adjust return type if you have a specific User type
+  async getCurrentUser(): Promise<any> {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -70,6 +60,5 @@ class AuthService {
   }
 }
 
-// Export an instance of AuthService
 const authService = new AuthService();
 export default authService;
