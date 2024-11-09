@@ -52,7 +52,7 @@ const Navbar = () => {
   };
   return (
     <NavbarContainer>
-      <Logo>MyApp</Logo>
+      <Logo>Test</Logo>
       <NavItems>
         <NavItem href="/">Home</NavItem>
         {isAuthenticated ? (
