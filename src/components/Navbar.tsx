@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import authService from '../services/authService';
 import SVG from './Icons/Logo';
+import { Path } from '../common/constants/path.enum';
 
 const NavbarContainer = styled.nav`
   width: 100%;
-  padding: 1.2rem 2rem;
   background-color: #1f1f1f;
   color: #fff;
   display: flex;
@@ -18,9 +18,10 @@ const NavbarContainer = styled.nav`
 
 const Logo = styled.a`
   font-size: 1.5rem;
+  padding: 1rem;
+  padding-bottom: 0.5rem;
   font-weight: bold;
   letter-spacing: 1px;
-  margin-left: 2rem;
   color: #61dafb;
 `;
 
@@ -53,17 +54,17 @@ const Navbar = () => {
   };
   return (
     <NavbarContainer>
-      <Logo href='/'><SVG/></Logo>
+      <Logo href={Path.HOME}><SVG/></Logo>
       <NavItems>
         {isAuthenticated ? (
           <>
-            <NavItem href="/history">History</NavItem>
+            <NavItem href={Path.HISTORY}>History</NavItem>
             <NavItem onClick={handleLogout}>Logout</NavItem>
           </>
         ) : (
           <>
-            <NavItem href="/login">Login</NavItem>
-            <NavItem href="/register">Register</NavItem>
+            <NavItem href={Path.LOGIN}>Login</NavItem>
+            <NavItem href={Path.REGISTER}>Register</NavItem>
           </>
         )}
       </NavItems>

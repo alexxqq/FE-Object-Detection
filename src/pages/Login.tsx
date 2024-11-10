@@ -4,6 +4,7 @@ import styled from "styled-components";
 import authService from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { Path } from "../common/constants/path.enum";
 
 interface IFormInput {
   username: string;
@@ -92,7 +93,7 @@ const Login: React.FC = () => {
     try {
       const response = await authService.login(data.username, data.password);
       console.log("Login successful:", response);
-      navigate("/");
+      navigate(Path.HOME);
     } catch (err: any) {
       setError(err.message);
     }

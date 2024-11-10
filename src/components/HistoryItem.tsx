@@ -46,8 +46,8 @@ const HistoryItem: React.FC<HistoryItemProps> = ({ item, onDelete }) => {
     <HistoryItemContainer>
       <ItemDetail><strong>Task ID:</strong> {item.id || 'N/A'}</ItemDetail>
       <ItemDetail><strong>User ID:</strong> {item.user_id}</ItemDetail>
-      <ItemDetail><strong>Status:</strong> {item.status || 'N/A'}</ItemDetail>
-      <ItemDetail><strong>Error:</strong> {item.error || 'None'}</ItemDetail>
+      {/* <ItemDetail><strong>Status:</strong> {item.status || 'N/A'}</ItemDetail> */}
+      {/* <ItemDetail><strong>Error:</strong> {item.error || 'None'}</ItemDetail> */}
       <ItemDetail><strong>Results:</strong></ItemDetail>
       <ul>
         {item.results.length > 0 ? (

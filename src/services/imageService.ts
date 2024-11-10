@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import { ImageEndpoint } from '../common/constants/image.endpoint';
+import { TaskEndpoint } from '../common/constants/task.enpoint';
 class DetectionService {
   private API_URL: string;
 
@@ -19,7 +20,7 @@ class DetectionService {
         headers.Authorization = `Bearer ${token}`;
       }
   
-      const response = await axios.post(`${this.API_URL}/image/img_object_detection_to_json`, formData, {
+      const response = await axios.post(`${this.API_URL}/${ImageEndpoint.Json}`, formData, {
         headers,
       });
   
@@ -33,7 +34,7 @@ class DetectionService {
   async detectObjectsToImg(formData: FormData) {
     try {
   
-      const response = await axios.post(`${this.API_URL}/image/img_object_detection_to_img`, formData, {
+      const response = await axios.post(`${this.API_URL}/${ImageEndpoint.Img}`, formData, {
         responseType: 'blob',
         headers: {
           
@@ -48,7 +49,7 @@ class DetectionService {
   async getHistory() {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${this.API_URL}/task/history`, {
+      const response = await axios.get(`${this.API_URL}/${TaskEndpoint.History}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,7 +65,7 @@ class DetectionService {
       if (!token) {
         throw new Error('User is not authenticated');
       }
-      await axios.delete(`${this.API_URL}/task/history/${taskId}`, {
+      await axios.delete(`${this.API_URL}/${TaskEndpoint.History}/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
     } catch (error: any) {

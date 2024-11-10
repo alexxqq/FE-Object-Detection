@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import HistoryItem from '../components/HistoryItem';
 import authService from '../services/authService';
 import { useNavigate } from 'react-router-dom';
+import { Path } from '../common/constants/path.enum';
 
 const Container = styled.div`
   display: flex;
@@ -48,7 +49,7 @@ const History: React.FC = () => {
   const isAuthenticated = authService.isAuthenticated();
 
   if (!isAuthenticated) {
-    navigate('/');
+    navigate(Path.HOME);
   }
 
   useEffect(() => {

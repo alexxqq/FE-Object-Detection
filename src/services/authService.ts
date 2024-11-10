@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { AuthEndpoint } from '../common/constants/auth.endpoint';
 
 interface AuthResponse {
   access_token: string;
@@ -10,12 +11,12 @@ class AuthService {
   private API_URL: string;
 
   constructor() {
-    this.API_URL = `${import.meta.env.VITE_APP_API_URL}/auth` as string;
+    this.API_URL = `${import.meta.env.VITE_APP_API_URL}` as string;
   }
 
   async register(username: string, password: string, email: string): Promise<AuthResponse> {
     try {
-      const response: AxiosResponse<AuthResponse> = await axios.post(`${this.API_URL}/register`, { username, password, email });
+      const response: AxiosResponse<AuthResponse> = await axios.post(`${this.API_URL}/${AuthEndpoint.Register}`, { username, password, email });
       return response.data;
     } catch (error: any) {
       throw new Error(error.response?.data?.detail || 'Error registering user');
@@ -24,7 +25,7 @@ class AuthService {
 
   async login(username: string, password: string): Promise<AuthResponse> {
     try {
-      const response: AxiosResponse<AuthResponse> = await axios.post(`${this.API_URL}/login`, { username, password });
+      const response: AxiosResponse<AuthResponse> = await axios.post(`${this.API_URL}/${AuthEndpoint.Login}`, { username, password });
       if (response.data.access_token) {
         localStorage.setItem('token', response.data.access_token);
       }
@@ -50,7 +51,7 @@ class AuthService {
       if (!token) {
         throw new Error('User is not authenticated');
       }
-      const response: AxiosResponse<any> = await axios.get(`${this.API_URL}/me`, {
+      const response: AxiosResponse<any> = await axios.get(`${this.API_URL}/${AuthEndpoint.Me}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
