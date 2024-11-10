@@ -4,6 +4,8 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import History from '../pages/History';
 import { Path } from '../common/constants/path.enum';
+import NotFound from '../pages/NotFound'; 
+
 const AppRouter = () => {
   return (
     <Router>
@@ -12,6 +14,7 @@ const AppRouter = () => {
         <Route path={Path.LOGIN} element={<Login />} />
         <Route path={Path.REGISTER} element={<Register />} />
         <Route path={Path.HISTORY} element={<History />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
