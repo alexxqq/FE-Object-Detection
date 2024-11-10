@@ -12,7 +12,7 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   margin: 1rem 0;
-  background-color: #191e29;
+  background-color: #132d46;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
