@@ -17,13 +17,14 @@ Make sure you have the following installed:
    git clone git@github.com:alexxqq/FE-Object-Detection.git
    cd FE-ObjectDetection
    ```
-2. **Install dependencies and ru:**
 
+2. **Create env file (if needed)**
+   ```bash
+   VITE_APP_API_URL=http://backend
+   ```
+
+3. **Install dependencies and run:**
    ```bash
    npm install
    npm run dev
-   ```
-3. **Create env file (if needed)**
-   ```bash
-   VITE_APP_API_URL=http://backend
    ```
